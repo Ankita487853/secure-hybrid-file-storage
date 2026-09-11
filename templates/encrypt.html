@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mb-4">Encrypt a File</h3>
+
+<div class="card shadow-sm p-4">
+    <form method="POST" action="/do_encrypt" enctype="multipart/form-data">
+        <label class="form-label">Select a file to encrypt:</label>
+        <input type="file" name="file" class="form-control" required>
+        <button class="btn btn-success mt-3">Encrypt & Upload</button>
+    </form>
+</div>
+
+{% if enc_filename %}
+<div class="alert alert-success mt-3">
+    File <strong>{{ enc_filename }}</strong> encrypted successfully and uploaded to cloud!
+    <br>
+    <a href="/download/{{ enc_filename }}" class="btn btn-primary btn-sm mt-2">Download Encrypted File</a>
+</div>
+{% endif %}
+
+{% endblock %}

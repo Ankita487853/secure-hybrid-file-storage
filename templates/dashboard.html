@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Encrypted Files Dashboard</h3>
+<p class="text-muted mb-3">
+    Only encrypted (.enc) files are displayed. Decrypted files are hidden.
+</p>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>File</th>
+            <th style="width: 40%">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for f in files %}
+        {% if f.endswith('.enc') %}
+        <tr>
+            <td>{{ f }}</td>
+            <td>
+                <a href="/download/{{ f }}" class="btn btn-primary btn-sm">Download</a>
+                <a href="/preview/{{ f }}" class="btn btn-info btn-sm text-white">Metadata</a>
+                <a href="/auto_decrypt/{{ f }}" class="btn btn-success btn-sm">Auto-Decrypt</a>
+                <a href="/delete/{{ f }}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Delete this file and its metadata?');">Delete</a>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

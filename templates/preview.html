@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Metadata Preview</h3>
+
+<div class="card p-4 shadow-sm">
+    <h5>File: {{ filename }}</h5>
+    <hr>
+    <pre>
+Original File: {{ meta["original_filename"] }}
+Encrypted At: {{ meta.get("encrypted_at") }}
+IV: {{ meta["iv"] }}
+Wrapped AES Key: {{ meta["wrapped_key"] }}
+Chaos Params: {{ meta["chaos"] }}
+RSA Public Key: {{ meta["rsa_public"] }}
+SHA256 (original): {{ meta.get("sha256_original") }}
+    </pre>
+
+    <p class="text-muted">Private key is hidden for security.</p>
+
+    <a href="/request_otp/{{ filename }}" class="btn btn-warning mt-2">Request OTP to Decrypt</a>
+    <a href="/dashboard" class="btn btn-secondary mt-2">Back</a>
+</div>
+
+{% endblock %}
